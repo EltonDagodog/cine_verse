@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Link from "next/link"; // Added for navigation
+import Link from "next/link"; 
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 
@@ -33,9 +33,11 @@ const SignIn = () => {
       localStorage.setItem("refresh_token", refresh_token);
 
       router.push("/homepage");
-    } catch (err) { // Removed ': any'
+    } catch (err) { 
       setError(
-        (err as any).response?.data?.error || "Login failed. Please try again."
+        axios.isAxiosError(err) && err.response?.data?.error
+          ? err.response.data.error
+          : "Login failed. Please try again."
       );
     }
   };

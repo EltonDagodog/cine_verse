@@ -32,15 +32,17 @@ export default function SignupPage() {
       return;
     }
     try {
-      const response = await axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/users/register/` ||
           "http://127.0.0.1:8000/users/register/",
         formData
       );
       alert("Signup successful!");
+      
       router.push("/signin");
-    } catch (_error) { // Line 35: Renamed 'error' to '_error'
+    } catch (_error) { 
       alert("Signup failed! Please try again.");
+      console.error(_error);
     }
   };
 

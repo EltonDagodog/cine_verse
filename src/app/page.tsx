@@ -39,6 +39,7 @@ const MovieList = () => {
         setMovies(response.data);
       } catch (_err) { 
         setError("Failed to fetch movies");
+        console.error("Error fetching movies:", _err);
       } finally {
         setLoading(false);
       }

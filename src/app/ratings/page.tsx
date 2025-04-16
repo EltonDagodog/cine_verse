@@ -41,6 +41,7 @@ export default function RatingsPage() {
         setRatings(response.data);
       } catch (_err) { 
         setError("Failed to fetch ratings. Please check your token.");
+        console.error("Error fetching ratings:", _err);
       }
     };
 

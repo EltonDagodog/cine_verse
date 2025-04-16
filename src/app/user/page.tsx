@@ -44,15 +44,16 @@ export default function UserPage() {
         );
 
         setUser(response.data);
-      } catch (_error) { // Renamed 'error' to '_error'
+      } catch (_error) { 
         setError("Failed to fetch user details.");
+        console.error(_error); 
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserDetails();
-  }, [router]); // Added 'router' to dependencies
+  }, [router]); 
 
   if (loading) return <p className="text-center text-gray-400 pt-20">Loading...</p>;
   if (error)

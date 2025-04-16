@@ -40,7 +40,7 @@ export default function Navbar() {
         setUser(response.data);
       } catch (_error) { 
         
-        console.log("Failed to fetch user details");
+        console.error("Error fetching user details:", _error);
       } finally {
         setLoading(false);
       }

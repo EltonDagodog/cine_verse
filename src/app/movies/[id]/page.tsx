@@ -125,6 +125,7 @@ const MovieDetails = () => {
         }
       } catch (_err) { // Line 122: Renamed 'err' to '_err'
         setError("Failed to fetch ratings. Please check your token.");
+        console.error("Error fetching ratings:", _err);
       }
     };
 
@@ -142,7 +143,8 @@ const MovieDetails = () => {
         );
         setMovie(response.data);
       } catch (_err) { // Line 141: Renamed 'err' to '_err'
-        setError("Failed to fetch movie details");
+        setError("Failed to fetch movie details: " );
+        console.error("Error fetching movie details:", _err);
       } finally {
         setLoading(false);
       }
