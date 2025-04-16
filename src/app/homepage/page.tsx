@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
@@ -25,14 +26,14 @@ export default function Home() {
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/movie/api/movies/");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/movie/api/movies/` || "http://127.0.0.1:8000/movie/api/movies/");
         setMovies(response.data);
-      } catch (err) {
+      } catch (_err) { 
         setError("Failed to fetch movies");
       } finally {
         setLoading(false);
@@ -41,14 +42,15 @@ export default function Home() {
 
     fetchMovies();
   }, []);
+
   const handleWatchNow = (movieId: number) => {
     const token = localStorage.getItem("access_token");
-  
+
     if (token) {
       router.push(`/movies/${movieId}`);
     } else {
       alert("Please log in to watch the movie!");
-      router.push("/signin"); 
+      router.push("/signin");
     }
   };
 
@@ -71,11 +73,11 @@ export default function Home() {
             <h1 className="text-gray-300 text-5xl font-bold">{movies[0].title}</h1>
             <p className="mt-2 text-lg w-2/3 text-gray-400">{movies[0].description}</p>
             <div className="mt-4 flex gap-4">
-              <button 
-              onClick={() => handleWatchNow(movies[0].id)}
-              className="bg-white text-black px-6 py-2 flex items-center gap-2 rounded-md">
+              <button
+                onClick={() => handleWatchNow(movies[0].id)}
+                className="bg-white text-black px-6 py-2 flex items-center gap-2 rounded-md"
+              >
                 <PlayIcon className="h-6 w-6" /> Play
-               
               </button>
               <button className="bg-gray-700 px-6 py-2 flex items-center gap-2 rounded-md text-white">
                 <InformationCircleIcon className="h-6 w-6" /> More Info
@@ -84,7 +86,6 @@ export default function Home() {
           </div>
         </div>
       )}
-      
 
       {/* Movies List */}
       <section className="px-24 pb-12 bg-[#10131a]">
@@ -96,7 +97,10 @@ export default function Home() {
         {!loading && !error && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {movies.map((movie) => (
-              <div key={movie.id} className="relative bg-[#181b23] p-4 rounded-lg shadow-lg flex flex-col items-center">
+              <div
+                key={movie.id}
+                className="relative bg-[#181b23] p-4 rounded-lg shadow-lg flex flex-col items-center"
+              >
                 {/* Movie Image */}
                 <Image
                   src={movie.image}
@@ -131,10 +135,11 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Watch Now Button (Moved to Bottom) */}
-                <button 
-                onClick={() => handleWatchNow(movie.id)}
-                className="mt-4 w-full bg-red-600 text-white py-2 text-md font-bold rounded-md transition duration-200 hover:bg-red-700">
+                {/* Watch Now Button */}
+                <button
+                  onClick={() => handleWatchNow(movie.id)}
+                  className="mt-4 w-full bg-red-600 text-white py-2 text-md font-bold rounded-md transition duration-200 hover:bg-red-700"
+                >
                   Watch Now
                 </button>
               </div>

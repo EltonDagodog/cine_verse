@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link"; // Added for navigation
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 
@@ -17,10 +18,14 @@ const SignIn = () => {
     setError(""); // Reset error state
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/users/login/", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/login/` ||
+          "http://127.0.0.1:8000/users/login/",
+        {
+          email,
+          password,
+        }
+      );
 
       const { access_token, refresh_token } = response.data;
 
@@ -28,26 +33,32 @@ const SignIn = () => {
       localStorage.setItem("refresh_token", refresh_token);
 
       router.push("/homepage");
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Login failed. Please try again.");
+    } catch (err) { // Removed ': any'
+      setError(
+        (err as any).response?.data?.error || "Login failed. Please try again."
+      );
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-black relative">
-      <Navbar/>
-      <Sidebar/>
+      <Navbar />
+      <Sidebar />
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center" 
-          style={{ 
-            backgroundImage: 'url("https://static.vecteezy.com/system/resources/thumbnails/001/254/680/small_2x/cinema-background-concept.jpg")',
-            opacity: 0.2
-          }}>
-      </div>
-            
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            'url("https://static.vecteezy.com/system/resources/thumbnails/001/254/680/small_2x/cinema-background-concept.jpg")',
+          opacity: 0.2,
+        }}
+      ></div>
+
       <div className="relative z-10 w-full max-w-md mx-auto p-8 bg-black bg-opacity-60 rounded-lg shadow-lg">
-        <h1 className="text-4xl font-extrabold text-white text-center mb-8">Sign In</h1>
-        
+        <h1 className="text-4xl font-extrabold text-white text-center mb-8">
+          Sign In
+        </h1>
+
         {error && <p className="text-red-500 text-sm text-center mb-3">{error}</p>}
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -82,9 +93,9 @@ const SignIn = () => {
         </form>
 
         <div className="mt-4 text-center">
-          <a href="/signup" className="text-white text-sm hover:underline">
+          <Link href="/signup" className="text-white text-sm hover:underline">
             New to the platform? Sign up now.
-          </a>
+          </Link>
         </div>
       </div>
     </div>

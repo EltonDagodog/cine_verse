@@ -1,6 +1,5 @@
 "use client";
 import { HomeIcon, FilmIcon, BookmarkIcon } from "@heroicons/react/16/solid";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { useRouter } from "next/navigation";
 
 

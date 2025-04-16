@@ -21,28 +21,33 @@ const MyFavorites = () => {
 
   useEffect(() => {
     const fetchFavorites = async () => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-        alert("You need to login first")
-        router.push("/signin")
-    }
-    try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/movies/favorites/`, {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        alert("You need to login first");
+        router.push("/signin");
+      }
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/movies/favorites/` ||
+            `http://127.0.0.1:8000/api/movies/favorites/`,
+          {
             headers: { Authorization: `Bearer ${token}` },
-          });
+          }
+        );
         setFavorites(response.data);
-      } catch (error) {
-        
+      } catch (_error) { // Line 34: Renamed 'error' to '_error'
+        console.error("Failed to fetch favorites:", _error);
+        alert("Failed to load favorites. Please try again.");
       }
     };
     fetchFavorites();
-  }, []);
+  }, [router]); // Line 39: Added 'router' to dependency array
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
-    <Sidebar />
-    <Navbar />
-      <h1 className="text-3xl pt-20 pl-20  font-bold mb-6">My Favorites</h1>
+      <Sidebar />
+      <Navbar />
+      <h1 className="text-3xl pt-20 pl-20 font-bold mb-6">My Favorites</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pr-20 pl-20 gap-6">
         {favorites.length > 0 ? (
           favorites.map((movie) => (
@@ -53,12 +58,14 @@ const MyFavorites = () => {
             >
               <h2 className="text-xl font-bold">{movie.title}</h2>
               <p className="text-gray-400 text-sm">{movie.release_date}</p>
-              <video
-                controls
-                className="w-full rounded-lg mt-4"
-              >
+              <video controls className="w-full rounded-lg mt-4">
                 <source
-                  src={movie.video.startsWith("http") ? movie.video : `http://127.0.0.1:8000${movie.video}`}
+                  src={
+                    movie.video.startsWith("http")
+                      ? movie.video
+                      : `${process.env.NEXT_PUBLIC_API_URL}${movie.video}` ||
+                        `http://127.0.0.1:8000${movie.video}`
+                  }
                   type="video/mp4"
                 />
               </video>
