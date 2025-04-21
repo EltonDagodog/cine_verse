@@ -56,8 +56,9 @@ export default function Home() {
 
   return (
     <div className="relative h-screen bg-black">
+        <Navbar />
       <Sidebar />
-      <Navbar />
+ 
 
       {/* Hero Section */}
       {movies.length > 0 && (

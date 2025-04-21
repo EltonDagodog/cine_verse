@@ -59,11 +59,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-16 w-[calc(100%-64px)] bg-transparent text-white flex items-center justify-between p-4 z-50">
+    <header className="fixed top-0 w-full bg-black text-white flex items-center justify-between p-4 z-1000">
       <h1 className="text-red-600 text-3xl font-bold">Undecided</h1>
       <nav className="hidden md:flex space-x-6">
         <Link href="/homepage" className="hover:text-red-500">Home</Link> 
-        <Link href="/" className="hover:text-red-500">Movies</Link> 
+        <Link href="/movie_list" className="hover:text-red-500">Movies</Link> 
         <Link href="/about" className="hover:text-red-500">About us</Link> 
       </nav>
       <div className="relative flex items-center space-x-2">
@@ -81,8 +81,8 @@ export default function Navbar() {
         )}
         {isLoggedIn && dropdownOpen && (
           <div className="absolute right-0 mt-40 w-40 bg-white text-black rounded-md shadow-lg overflow-hidden">
-            <Link href="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</Link> {/* Replaced <a> with <Link> */}
-            <Link href="/my_favorites" className="block px-4 py-2 hover:bg-gray-200">Favorites</Link> {/* Replaced <a> with <Link> */}
+            <Link href="/user" className="block px-4 py-2 hover:bg-gray-200">Profile</Link>
+            <Link href="/my_favorites" className="block px-4 py-2 hover:bg-gray-200">Favorites</Link>
             <button
               onClick={() => {
                 localStorage.removeItem("access_token");

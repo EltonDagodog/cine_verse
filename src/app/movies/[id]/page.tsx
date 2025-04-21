@@ -142,7 +142,7 @@ const MovieDetails = () => {
             `http://127.0.0.1:8000/movie/api/movies/${id}/`
         );
         setMovie(response.data);
-      } catch (_err) { // Line 141: Renamed 'err' to '_err'
+      } catch (_err) { 
         setError("Failed to fetch movie details: " );
         console.error("Error fetching movie details:", _err);
       } finally {
@@ -245,6 +245,9 @@ const MovieDetails = () => {
   if (!movie) return <p>Movie not found</p>;
 
   return (
+    <>
+    <Sidebar />
+    <Navbar />
     <div
       className="relative min-h-screen bg-cover bg-center z-0"
       style={{ backgroundImage: `url(${movie.image})` }}
@@ -253,8 +256,7 @@ const MovieDetails = () => {
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
       <div className="z-10 relative max-w-4xl mx-auto p-6 text-white shadow-xl rounded-lg border border-gray-800">
-        <Sidebar />
-        <Navbar />
+        
         <h2 className="text-4xl font-bold mb-2 text-red-500 pt-20">{movie.title}</h2>
         <p className="text-lg text-gray-300 mb-4">{movie.description}</p>
         <p className="text-gray-500">Released on: {movie.release_date}</p>
@@ -347,6 +349,7 @@ const MovieDetails = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 
