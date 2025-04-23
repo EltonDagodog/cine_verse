@@ -31,8 +31,9 @@ export default function Home() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/movie/api/movies/` || "http://127.0.0.1:8000/movie/api/movies/");
-        // const response = await axios.get("http://127.0.0.1:8000/movie/api/movies/");
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com/';
+        const response = await axios.get(`${API_URL}/movie/api/movies/`);
+     
         setMovies(response.data);
       } catch (_err) { 
          setError("failed to fetch movies." + (_err instanceof Error ? _err.message : ""));
