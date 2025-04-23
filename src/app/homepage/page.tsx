@@ -27,6 +27,7 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com';
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -66,7 +67,7 @@ export default function Home() {
       {movies.length > 0 && (
         <div className="relative w-full h-[80vh]">
           <Image
-            src={movies[0].image}
+            src={movies[0].image.startsWith('http') ? movies[0].image : `${API_URL}${movies[0].image}`}
             alt={movies[0].title}
             layout="fill"
             objectFit="cover"
@@ -106,7 +107,7 @@ export default function Home() {
               >
                 {/* Movie Image */}
                 <Image
-                  src={movie.image}
+                  src={movie.image.startsWith('http') ? movie.image : `${API_URL}${movie.image}`}
                   alt={movie.title}
                   width={300}
                   height={450}
