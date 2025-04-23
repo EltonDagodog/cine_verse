@@ -31,7 +31,7 @@ export default function Home() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com/';
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com';
         const response = await axios.get(`${API_URL}/movie/api/movies/`);
      
         setMovies(response.data);
