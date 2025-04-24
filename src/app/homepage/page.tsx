@@ -33,7 +33,7 @@ export default function Home() {
     const fetchMovies = async () => {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com/';
-        const response = await axios.get(`${API_URL}movie/api/movies/`);
+        const response = await axios.get(`${API_URL}/movie/api/movies/`);
         console.log(response.data);
      
         setMovies(response.data);
