@@ -34,7 +34,7 @@ const MovieList = () => {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}movie/api/movies/` ||
-            "http://127.0.0.1:8000/movie/api/movies/"
+            "https://my-backend-lpu5.onrender.com/movie/api/movies/"
         );
         setMovies(response.data);
       } catch (_err) { 
