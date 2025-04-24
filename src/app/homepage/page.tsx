@@ -27,13 +27,14 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com/';
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com';
-        const response = await axios.get(`${API_URL}/movie/api/movies/`);
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://my-backend-lpu5.onrender.com/';
+        const response = await axios.get(`${API_URL}movie/api/movies/`);
+        console.log(response.data);
      
         setMovies(response.data);
       } catch (_err) { 
