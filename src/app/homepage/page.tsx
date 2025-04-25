@@ -46,7 +46,7 @@ export default function Home() {
     <div className="min-h-screen bg-black">
       <Navbar />
       {/* <Sidebar /> */}
-      <main className="pt-16 pl-16 md:pl-16">
+      <main className="pt-16 pl-4 md:pl-4">
         {/* Hero Section */}
         {loading && <LoadingSpinner />}
         {!loading && movies.length > 0 && (

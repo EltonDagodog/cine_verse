@@ -67,7 +67,7 @@ export default function SignupPage() {
       ></div>
 
       {/* Main Content */}
-      <main className="pt-16 pl-16 md:pl-16 flex justify-center items-center min-h-screen">
+      <main className="pt-16 pl-4 md:pl-4 flex justify-center items-center min-h-screen">
         <div className="relative z-10 w-full max-w-md sm:max-w-lg md:max-w-xl p-6 sm:p-8 bg-[#181b23] rounded-lg shadow-xl animate-fade-in">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-red-500 text-center mb-6 sm:mb-8">
             Create Account

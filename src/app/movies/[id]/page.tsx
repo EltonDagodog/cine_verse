@@ -209,7 +209,7 @@ const MovieDetails = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
 
-      <main className="pt-16 pl-16 md:pl-16">
+      <main className="pt-16 pl-4 md:pl-4">
         {loading ? (
           <LoadingSpinner />
         ) : error ? (

@@ -42,7 +42,7 @@ const MyFavorites = () => {
     <div className="min-h-screen bg-black">
       <Navbar />
   
-      <main className="pt-16 pl-16 md:pl-16">
+      <main className="pt-16 pl-4 md:pl-4">
         <section className="p-4 sm:p-8 md:p-12 pb-12 bg-[#10131a]">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
             My Favorites

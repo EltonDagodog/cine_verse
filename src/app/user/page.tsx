@@ -67,7 +67,7 @@ export default function UserPage() {
       ></div>
 
       {/* Main Content */}
-      <main className="pt-16 pl-16 md:pl-16 flex justify-center items-center min-h-screen">
+      <main className="pt-16 pl-4 md:pl-4 flex justify-center items-center min-h-screen">
         {loading ? (
           <div className="relative z-10 text-center text-gray-400 text-lg sm:text-xl">
             Loading...

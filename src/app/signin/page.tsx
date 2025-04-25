@@ -54,7 +54,7 @@ const SignIn = () => {
       ></div>
 
       {/* Main Content */}
-      <main className="pt-16 pl-16 md:pl-16 flex justify-center items-center min-h-screen">
+      <main className="pt-16 pl-4 md:pl-4 flex justify-center items-center min-h-screen">
         <div className="relative z-10 w-full max-w-sm sm:max-w-md md:max-w-lg p-6 sm:p-8 bg-[#181b23] rounded-lg shadow-xl animate-fade-in">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white text-center mb-6 sm:mb-8">
             Sign In
