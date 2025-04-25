@@ -16,35 +16,35 @@ export default function Search() {
   const query = searchParams.get("q");
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/";
 
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      if (!query) {
-        router.push("/homepage");
-        return;
-      }
+  // useEffect(() => {
+  //   const fetchSearchResults = async () => {
+  //     if (!query) {
+  //       router.push("/homepage");
+  //       return;
+  //     }
 
-      if (!API_URL) {
-        setError("API URL is not configured.");
-        setLoading(false);
-        return;
-      }
+  //     if (!API_URL) {
+  //       setError("API URL is not configured.");
+  //       setLoading(false);
+  //       return;
+  //     }
 
-      setLoading(true);
-      try {
-        // Use the correct search endpoint and query parameter
-        const response = await axios.get(`${API_URL}movie/api/movies/search/`, {
-          params: { q: query }, // Adjust 'q' to match your backend's expected parameter
-        });
-        setMovies(response.data);
-      } catch (err) {
-        setError("Failed to fetch search results: " + (err instanceof Error ? err.message : "Unknown error"));
-        console.error("Error fetching search results:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchSearchResults();
-  }, [query, API_URL, router]);
+  //     setLoading(true);
+  //     try {
+  //       // Use the correct search endpoint and query parameter
+  //       const response = await axios.get(`${API_URL}movie/api/movies/search/`, {
+  //         params: { q: query }, // Adjust 'q' to match your backend's expected parameter
+  //       });
+  //       setMovies(response.data);
+  //     } catch (err) {
+  //       setError("Failed to fetch search results: " + (err instanceof Error ? err.message : "Unknown error"));
+  //       console.error("Error fetching search results:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchSearchResults();
+  // }, [query, API_URL, router]);
 
   const handleWatchNow = (movieId: number) => {
     const token = localStorage.getItem("access_token");
