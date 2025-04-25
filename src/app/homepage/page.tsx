@@ -17,16 +17,13 @@ export default function Home() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const fetchMovies = async () => {
-    if (!API_URL) {
-      setError("API URL is not configured.");
-      setLoading(false);
-      return;
-    }
+    setLoading(true);
     try {
       const response = await axios.get(`${API_URL}movie/api/movies/`);
       setMovies(response.data);
     } catch (err) {
       setError("Failed to fetch movies: " + (err instanceof Error ? err.message : "Unknown error"));
+      console.error("Error fetching movies:", err);
     } finally {
       setLoading(false);
     }
@@ -34,7 +31,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, []); 
 
   const handleWatchNow = (movieId: number) => {
     const token = localStorage.getItem("access_token");

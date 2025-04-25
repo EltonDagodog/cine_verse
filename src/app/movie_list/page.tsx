@@ -20,6 +20,7 @@ const MovieList = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`${API_URL}movie/api/movies/`);
         setMovies(response.data);
@@ -32,8 +33,7 @@ const MovieList = () => {
     };
 
     fetchMovies();
-  }, []);
-
+  }, [API_URL]); 
   const handleWatchNow = (movieId: number) => {
     const token = localStorage.getItem("access_token");
     if (token) {

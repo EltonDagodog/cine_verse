@@ -37,7 +37,7 @@ const MyFavorites = () => {
       }
     };
     fetchFavorites();
-  }, [router]);
+  }, [router, API_URL]);
 
   return (
     <div className="min-h-screen bg-black">

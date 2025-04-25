@@ -63,7 +63,7 @@ const MovieDetails = () => {
     };
 
     fetchReactions();
-  }, [id]);
+  }, [id, API_URL]);
 
   const handleToggleHeart = async () => {
     const token = localStorage.getItem("access_token");
@@ -109,7 +109,7 @@ const MovieDetails = () => {
     };
 
     fetchRatings();
-  }, [id]);
+  }, [id, API_URL]);
 
   useEffect(() => {
     if (!id) return;
@@ -127,7 +127,7 @@ const MovieDetails = () => {
     };
 
     fetchMovieDetails();
-  }, [id]);
+  }, [id, API_URL]);
 
   useEffect(() => {
     if (!id || !showComments) return;
@@ -142,7 +142,7 @@ const MovieDetails = () => {
     };
 
     fetchComments();
-  }, [id, showComments]);
+  }, [id, showComments, API_URL]);
 
   const handleRating = async (newRating: number) => {
     const movieId = Number(id);
