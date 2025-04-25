@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../components/navbar"; // Added Navbar
-import Sidebar from "../components/sidebar"; // Added Sidebar
-import { useRouter } from "next/navigation"; // Added for router redirect
+import Navbar from "../components/navbar";
+import Sidebar from "../components/sidebar";
+import { useRouter } from "next/navigation";
 
 interface User {
   first_name: string;
@@ -18,10 +18,11 @@ interface User {
 }
 
 export default function UserPage() {
-  const [user, setUser] = useState<User | null>(null); // Replaced 'any' with 'User'
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter(); // Added for navigation
+  const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/";
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -30,77 +31,96 @@ export default function UserPage() {
       if (!token) {
         setError("You need to log in to view this page.");
         setLoading(false);
-        router.push("/signin"); // Redirect to signin
+        router.push("/signin");
         return;
       }
 
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/users/me/` ||
-            "http://127.0.0.1:8000/users/me/",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
+        const response = await axios.get(`${API_URL}users/me/`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUser(response.data);
-      } catch (_error) { 
-        setError("Failed to fetch user details.");
-        console.error(_error); 
+      } catch (err) {
+        setError(
+          axios.isAxiosError(err) && err.response?.data?.error
+            ? err.response.data.error
+            : "Failed to fetch user details."
+        );
+        console.error("Error fetching user details:", err);
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserDetails();
-  }, [router]); 
-
-  if (loading) return <p className="text-center text-gray-400 pt-20">Loading...</p>;
-  if (error)
-    return <p className="text-center text-red-500 pt-20">{error}</p>;
+  }, [router]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black relative">
       <Navbar />
       <Sidebar />
-      <div className="flex justify-center items-center pt-20">
-        <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-lg w-full border border-gray-700">
-          <h2 className="text-3xl font-bold text-red-600 mb-6 text-center">
-            Account Details
-          </h2>
-          <div className="space-y-4 text-lg">
-            <p>
-              <span className="text-gray-400">Name:</span>{" "}
-              {user!.first_name} {user!.middle_name} {user!.last_name}
-            </p>
-            <p>
-              <span className="text-gray-400">Username:</span> {user!.username}
-            </p>
-            <p>
-              <span className="text-gray-400">Contact:</span> {user!.contact}
-            </p>
-            <p>
-              <span className="text-gray-400">Address:</span> {user!.address}
-            </p>
-            <p>
-              <span className="text-gray-400">Gender:</span> {user!.gender}
-            </p>
-            <p>
-              <span className="text-gray-400">Email:</span> {user!.email}
-            </p>
+      {/* Background with Gradient Overlay */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop")`,
+        }}
+      ></div>
+
+      {/* Main Content */}
+      <main className="pt-16 pl-16 md:pl-16 flex justify-center items-center min-h-screen">
+        {loading ? (
+          <div className="relative z-10 text-center text-gray-400 text-lg sm:text-xl">
+            Loading...
           </div>
-          <button
-            onClick={() => {
-              localStorage.removeItem("access_token");
-              localStorage.removeItem("refresh_token");
-              router.push("/signin"); // Replaced window.location.href
-            }}
-            className="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+        ) : error ? (
+          <div className="relative z-10 text-center text-red-500 text-lg sm:text-xl">
+            {error}
+          </div>
+        ) : (
+          <div className="relative z-10 w-full max-w-sm sm:max-w-md md:max-w-lg p-6 sm:p-8 bg-[#181b23] rounded-lg shadow-xl animate-fade-in">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-red-500 text-center mb-6 sm:mb-8">
+              Account Details
+            </h2>
+            <div className="space-y-4 sm:space-y-5 text-sm sm:text-base md:text-lg">
+              <p>
+                <span className="text-gray-400 font-semibold">Name:</span>{" "}
+                {user!.first_name} {user!.middle_name || ""} {user!.last_name}
+              </p>
+              <p>
+                <span className="text-gray-400 font-semibold">Username:</span>{" "}
+                {user!.username}
+              </p>
+              <p>
+                <span className="text-gray-400 font-semibold">Contact:</span>{" "}
+                {user!.contact}
+              </p>
+              <p>
+                <span className="text-gray-400 font-semibold">Address:</span>{" "}
+                {user!.address}
+              </p>
+              <p>
+                <span className="text-gray-400 font-semibold">Gender:</span>{" "}
+                {user!.gender}
+              </p>
+              <p>
+                <span className="text-gray-400 font-semibold">Email:</span>{" "}
+                {user!.email}
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
+                router.push("/signin");
+              }}
+              className="mt-6 sm:mt-8 w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 transition-all duration-200 font-semibold text-sm sm:text-base"
+            >
+              Logout
+            </button>
+          </div>
+        )}
+      </main>
     </div>
   );
 }
