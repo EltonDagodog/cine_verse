@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
 import { InformationCircleIcon, PlayIcon } from "@heroicons/react/16/solid";
 import { MovieType, MovieCard, LoadingSpinner } from "../components/moviecomponent";
@@ -46,7 +45,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <main className="pt-16 pl-16 md:pl-16">
         {/* Hero Section */}
         {loading && <LoadingSpinner />}

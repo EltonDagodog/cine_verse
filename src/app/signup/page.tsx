@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
+
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen bg-black relative">
       <Navbar />
-      <Sidebar />
+ 
       {/* Background with Gradient Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"

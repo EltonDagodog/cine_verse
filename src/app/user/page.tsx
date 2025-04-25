@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
 import { useRouter } from "next/navigation";
 
 interface User {
@@ -58,7 +57,7 @@ export default function UserPage() {
   return (
     <div className="min-h-screen bg-black relative">
       <Navbar />
-      <Sidebar />
+
       {/* Background with Gradient Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
 import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
+
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -44,7 +44,7 @@ const SignIn = () => {
   return (
     <div className="min-h-screen bg-black relative">
       <Navbar />
-      <Sidebar />
+ 
       {/* Background with Gradient Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"

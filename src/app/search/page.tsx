@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { MovieType, MovieCard, LoadingSpinner } from "../components/moviecomponent";
 import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
+
 
 // A separate component to handle useSearchParams with Suspense
 function SearchContent() {
@@ -93,7 +93,6 @@ export default function Search() {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      <Sidebar />
       <Suspense fallback={<LoadingSpinner />}>
         <SearchContent />
       </Suspense>

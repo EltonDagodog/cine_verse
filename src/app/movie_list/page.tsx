@@ -8,7 +8,7 @@ import ReactStars from "react-stars";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { MovieType, LoadingSpinner } from "../components/moviecomponent";
 import Navbar from "../components/navbar";
-import Sidebar from "../components/sidebar";
+
 
 const MovieList = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
@@ -56,7 +56,6 @@ const MovieList = () => {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      <Sidebar />
       <main className="pt-16 pl-16 md:pl-16">
         {/* Header and Search Bar */}
         <section className="p-4 sm:p-8 md:p-12 pb-12 bg-[#10131a]">

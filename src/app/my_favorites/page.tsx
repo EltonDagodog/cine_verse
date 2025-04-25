@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import { MovieType, LoadingSpinner } from "../components/moviecomponent";
-import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
 
 const MyFavorites = () => {
@@ -42,7 +41,7 @@ const MyFavorites = () => {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      <Sidebar />
+  
       <main className="pt-16 pl-16 md:pl-16">
         <section className="p-4 sm:p-8 md:p-12 pb-12 bg-[#10131a]">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">

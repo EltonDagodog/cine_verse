@@ -6,7 +6,6 @@ import axios from "axios";
 import ReactStars from "react-stars";
 import { FaComment, FaHeart } from "react-icons/fa";
 import { MovieType as MovieTypeImported, LoadingSpinner } from "../../components/moviecomponent";
-import Sidebar from "../../components/sidebar";
 import Navbar from "../../components/navbar";
 
 // Extend MovieType to include background_image and adjust fields
@@ -209,7 +208,7 @@ const MovieDetails = () => {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
-      <Sidebar />
+
       <main className="pt-16 pl-16 md:pl-16">
         {loading ? (
           <LoadingSpinner />
