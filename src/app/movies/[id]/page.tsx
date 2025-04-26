@@ -26,7 +26,7 @@ interface Reviews {
   id: number;
   movie: number;
   user: string;
-  rating: number;
+  rating: number | null; // Allow null in case API returns null
   created_at: string;
 }
 
@@ -98,9 +98,12 @@ const MovieDetails = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const userRating = response.data.find((r) => r.user);
-        if (userRating) {
-          setRating(userRating.rating);
-        }
+        // Ensure rating is a number, default to 0 if invalid
+        const newRating = typeof userRating?.rating === 'number' && !isNaN(userRating.rating)
+          ? userRating.rating
+          : 0;
+        setRating(newRating);
+        console.log("Fetched rating:", newRating, "Type:", typeof newRating); // Debug log
       } catch (err) {
         setError("Failed to fetch ratings: " + (err instanceof Error ? err.message : "Unknown error"));
         console.error("Error fetching ratings:", err);
@@ -163,7 +166,10 @@ const MovieDetails = () => {
         }
       );
       setRating(newRating);
-      setMovie((prev) => prev && { ...prev, average_rating: newRating });
+      setMovie((prev) => prev && {
+        ...prev,
+        average_rating: typeof newRating === 'number' ? newRating : prev.average_rating,
+      });
     } catch (err) {
       console.error("Failed to submit rating:", err);
       alert("Failed to submit rating. Please try again.");
@@ -260,14 +266,14 @@ const MovieDetails = () => {
                     </span>
                     <ReactStars
                       count={5}
-                      value={rating}
+                      value={typeof rating === 'number' && !isNaN(rating) ? rating : 0}
                       size={20}
                       edit={true}
                       color2="#ffd700"
                       onChange={handleRating}
                     />
                     <span className="ml-2 text-gray-300 font-semibold text-sm sm:text-base leading-none">
-                      {rating ? rating.toFixed(1) : "0.0"}
+                      {typeof rating === 'number' && !isNaN(rating) ? rating.toFixed(1) : "0.0"}
                     </span>
                   </div>
                   <button
