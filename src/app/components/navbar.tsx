@@ -73,7 +73,7 @@ export default function Navbar() {
       <nav className="hidden md:flex space-x-6">
         <Link href="/homepage" className="hover:text-red-500">Home</Link>
         <Link href="/movie_list" className="hover:text-red-500">Movies</Link>
-        <Link href="/about" className="hover:text-red-500">About us</Link>
+        <Link href="/" className="hover:text-red-500">About us</Link>
       </nav>
 
       {/* Right Section: Search, Profile, and Mobile Menu */}
