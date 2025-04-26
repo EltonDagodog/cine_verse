@@ -15,7 +15,7 @@ function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("q");
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
   useEffect(() => {
     const fetchSearchResults = async () => {

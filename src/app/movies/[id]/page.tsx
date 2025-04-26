@@ -43,7 +43,7 @@ const MovieDetails = () => {
   const [rating, setRating] = useState<number>(0);
   const [hearted, setHearted] = useState(false);
   const [totalHearts, setTotalHearts] = useState(0);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchReactions = async () => {

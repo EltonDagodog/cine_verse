@@ -16,7 +16,7 @@ const MovieList = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://my-backend-lpu5.onrender.com/";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchMovies = async () => {

@@ -18,6 +18,7 @@ export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -32,7 +33,7 @@ export default function Navbar() {
         return;
       }
       try {
-        const response = await axios.get("http://127.0.0.1:8000/users/me/", {
+        const response = await axios.get(`${API_URL}users/me/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
